@@ -35,7 +35,6 @@ class SpaceStories {
         self.onFinished()
         for story in stories {
             if let url = story.url {
-                print("name: '\(story.title ?? "no name")', img: '\(story.url ?? "no url")'")
                 thumbnails.append(manager.fetchImage(imageURL: url))
             }
         }
