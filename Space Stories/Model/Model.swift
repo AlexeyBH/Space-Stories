@@ -31,12 +31,11 @@ class SpaceStories {
     private let manager: NetworkManager = .init()
     
     private func updateThumbnails() {
-        self.onFinished()
-        print("loading thumbnails...")
         manager.onFinished = self.onFinished
+        self.onFinished()
         for story in stories {
             if let url = story.url {
-                print("New thumbnail thread started..")
+                print("name: '\(story.title ?? "no name")', img: '\(story.url ?? "no url")'")
                 thumbnails.append(manager.fetchImage(imageURL: url))
             }
         }

@@ -10,9 +10,25 @@ import UIKit
 class StoryListTableViewController: UITableViewController {
 
     private func reloadTableViewController() {
-        DispatchQueue.main.async {
-            print("On Finished thred..")
-            self.tableView.reloadData()
+        self.tableView.reloadData()
+    }
+    
+    private func cropImageToSquare(image: UIImage) -> UIImage? {
+        if let cgImage = image.cgImage {
+            let size = min(cgImage.width, cgImage.height)
+            let rect = CGRect(
+                x: (cgImage.width  - size) / 2,
+                y: (cgImage.height - size) / 2,
+                width: size,
+                height: size
+            )
+            if let cropped = cgImage.cropping(to: rect) {
+                return UIImage(cgImage: cropped)
+            } else {
+                return nil
+            }
+        } else {
+            return nil
         }
     }
     
@@ -35,30 +51,24 @@ class StoryListTableViewController: UITableViewController {
         100
     }
     
-    private func cropImageToRect(_ image: UIImage, _ size: Int) {
-     //   .. let rect = CGRect(x: image, y: 0, width: 0, height: 0)
-        
-        
-    }
-
-
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = indexPath.row
-        let shared = SpaceStories.shared
         let cell = tableView.dequeueReusableCell(withIdentifier: "spaceStoryCell", for: indexPath)
         var content = cell.defaultContentConfiguration()
         
-        if let thumbnail = shared.thumbnails[row] {
-            if let image = UIImage.init(data: thumbnail) {
-                cell.imageView?.layer.cornerRadius = 50
-                //let thumbnail = image.resizableImage(withCapInsets: .init(top: 0, left: 0, bottom: 100, right: 100))
-                content.image = image
-            }
+        if let thumbnail = SpaceStories.shared.thumbnails[row],
+           let image = UIImage(data: thumbnail),
+           let cropped = cropImageToSquare(image: image) {
+            content.image  = cropped
+            content.imageProperties.maximumSize = .init(
+                width: cell.bounds.height - 2,
+                height: cell.bounds.height - 2
+            )
         } else {
             content.image = UIImage.init(named: "questionMark")
         }
         
-        content.text = shared.stories[row].title
+        content.text = SpaceStories.shared.stories[row].title
         cell.contentConfiguration = content
         
         return cell
