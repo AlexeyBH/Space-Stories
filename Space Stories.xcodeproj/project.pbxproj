@@ -9,21 +9,27 @@
 /* Begin PBXBuildFile section */
 		42F515EE275251C100063DBB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F515ED275251C100063DBB /* AppDelegate.swift */; };
 		42F515F0275251C100063DBB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F515EF275251C100063DBB /* SceneDelegate.swift */; };
-		42F515F2275251C100063DBB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F515F1275251C100063DBB /* ViewController.swift */; };
 		42F515F5275251C100063DBB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42F515F3275251C100063DBB /* Main.storyboard */; };
 		42F515F7275251C200063DBB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42F515F6275251C200063DBB /* Assets.xcassets */; };
 		42F515FA275251C200063DBB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42F515F8275251C200063DBB /* LaunchScreen.storyboard */; };
+		42F5160A275255B100063DBB /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F51609275255B100063DBB /* NetworkManager.swift */; };
+		42F516102752568E00063DBB /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F5160F2752568E00063DBB /* Model.swift */; };
+		42F51612275256B300063DBB /* StoryListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F51611275256B300063DBB /* StoryListTableViewController.swift */; };
+		42F51614275256EB00063DBB /* StoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F51613275256EB00063DBB /* StoryViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		42F515EA275251C100063DBB /* Space Stories.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Space Stories.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		42F515ED275251C100063DBB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42F515EF275251C100063DBB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		42F515F1275251C100063DBB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		42F515F4275251C100063DBB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		42F515F6275251C200063DBB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		42F515F9275251C200063DBB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		42F515FB275251C300063DBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		42F51609275255B100063DBB /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkManager.swift; path = "Space Stories/Model/NetworkManager.swift"; sourceTree = SOURCE_ROOT; };
+		42F5160F2752568E00063DBB /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		42F51611275256B300063DBB /* StoryListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryListTableViewController.swift; sourceTree = "<group>"; };
+		42F51613275256EB00063DBB /* StoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,28 +62,21 @@
 		42F515EC275251C100063DBB /* Space Stories */ = {
 			isa = PBXGroup;
 			children = (
-				42F516042752523B00063DBB /* Model */,
+				42F5160E2752563300063DBB /* System */,
+				42F5160D2752561A00063DBB /* ViewControllers */,
+				42F5160B275255C400063DBB /* Model */,
 				42F51603275251F900063DBB /* Storyboards & Assets */,
 				42F51602275251E600063DBB /* View Controllers */,
-				42F51601275251CF00063DBB /* System */,
-				42F515ED275251C100063DBB /* AppDelegate.swift */,
-				42F515EF275251C100063DBB /* SceneDelegate.swift */,
 				42F515FB275251C300063DBB /* Info.plist */,
 			);
 			path = "Space Stories";
 			sourceTree = "<group>";
 		};
-		42F51601275251CF00063DBB /* System */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = System;
-			sourceTree = "<group>";
-		};
 		42F51602275251E600063DBB /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				42F515F1275251C100063DBB /* ViewController.swift */,
+				42F51611275256B300063DBB /* StoryListTableViewController.swift */,
+				42F51613275256EB00063DBB /* StoryViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -92,11 +91,29 @@
 			path = "Storyboards & Assets";
 			sourceTree = "<group>";
 		};
-		42F516042752523B00063DBB /* Model */ = {
+		42F5160B275255C400063DBB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				42F51609275255B100063DBB /* NetworkManager.swift */,
+				42F5160F2752568E00063DBB /* Model.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		42F5160D2752561A00063DBB /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = Model;
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		42F5160E2752563300063DBB /* System */ = {
+			isa = PBXGroup;
+			children = (
+				42F515ED275251C100063DBB /* AppDelegate.swift */,
+				42F515EF275251C100063DBB /* SceneDelegate.swift */,
+			);
+			path = System;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -170,7 +187,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				42F515F2275251C100063DBB /* ViewController.swift in Sources */,
+				42F51614275256EB00063DBB /* StoryViewController.swift in Sources */,
+				42F516102752568E00063DBB /* Model.swift in Sources */,
+				42F5160A275255B100063DBB /* NetworkManager.swift in Sources */,
+				42F51612275256B300063DBB /* StoryListTableViewController.swift in Sources */,
 				42F515EE275251C100063DBB /* AppDelegate.swift in Sources */,
 				42F515F0275251C100063DBB /* SceneDelegate.swift in Sources */,
 			);
