@@ -9,42 +9,53 @@ import Foundation
 import UIKit
 
 struct SpaceStory: Codable {
-    let explanation: String
-    let url: String
-    let hdurl: String
-    let title: String
+    let explanation: String?
+    let url: String?
+    let hdurl: String?
+    let title: String?
 }
 
 class SpaceStories {
     
     static let shared = SpaceStories()
+
+    var onFinished: () -> Void = { }
+
+    var thumbnails: [Data?] = []
     
-    let storyCount = 20
-    let stories: [SpaceStory]
-    let thumbnails: [Data?]
+    var stories: [SpaceStory] {
+        manager.stories
+    }
     
+    private let storyCount = 20
     private let manager: NetworkManager = .init()
     
-    private init() {
-        if let stories = manager.fetchStories(count: storyCount) {
-            self.stories = stories
-            var tmpThumbnails: [Data?] = []
-            for story in stories {
-                tmpThumbnails.append(
-                    manager.fetchImage(imageURL: story.url)
-                )
+    private func updateThumbnails() {
+        self.onFinished()
+        print("loading thumbnails...")
+        manager.onFinished = self.onFinished
+        for story in stories {
+            if let url = story.url {
+                print("New thumbnail thread started..")
+                thumbnails.append(manager.fetchImage(imageURL: url))
             }
-            thumbnails = tmpThumbnails
-        } else {
-            self.stories = []
-            self.thumbnails = []
         }
+    }
+    
+    private init() {
+        manager.onFinished = updateThumbnails
+        manager.fetchStories(count: storyCount)
     }
     
     func getStoryImage(forIndex: Int) -> Data? {
         if forIndex < 0 || forIndex >= stories.count {
             return nil
         }
-        return manager.fetchImage(imageURL: stories[forIndex].hdurl)
+        
+        if let hdurl = stories[forIndex].hdurl {
+            return manager.fetchImage(imageURL: hdurl)
+        } else {
+            return nil
+        }
     }
 }
