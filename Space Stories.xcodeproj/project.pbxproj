@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4279D8942753A51700CFE01B /* SpaceStoryViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4279D8932753A51700CFE01B /* SpaceStoryViewCell.swift */; };
 		42F515EE275251C100063DBB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F515ED275251C100063DBB /* AppDelegate.swift */; };
 		42F515F0275251C100063DBB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F515EF275251C100063DBB /* SceneDelegate.swift */; };
 		42F515F5275251C100063DBB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42F515F3275251C100063DBB /* Main.storyboard */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4279D8932753A51700CFE01B /* SpaceStoryViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceStoryViewCell.swift; sourceTree = "<group>"; };
 		42F515EA275251C100063DBB /* Space Stories.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Space Stories.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		42F515ED275251C100063DBB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42F515EF275251C100063DBB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				42F51611275256B300063DBB /* StoryListTableViewController.swift */,
+				4279D8932753A51700CFE01B /* SpaceStoryViewCell.swift */,
 				42F51613275256EB00063DBB /* StoryViewController.swift */,
 			);
 			path = "View Controllers";
@@ -191,6 +194,7 @@
 				42F516102752568E00063DBB /* Model.swift in Sources */,
 				42F5160A275255B100063DBB /* NetworkManager.swift in Sources */,
 				42F51612275256B300063DBB /* StoryListTableViewController.swift in Sources */,
+				4279D8942753A51700CFE01B /* SpaceStoryViewCell.swift in Sources */,
 				42F515EE275251C100063DBB /* AppDelegate.swift in Sources */,
 				42F515F0275251C100063DBB /* SceneDelegate.swift in Sources */,
 			);

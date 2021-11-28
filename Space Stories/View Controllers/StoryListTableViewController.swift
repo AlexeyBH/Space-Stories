@@ -74,26 +74,35 @@ class StoryListTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let row = indexPath.row
         let cell = tableView.dequeueReusableCell(withIdentifier: "spaceStoryCell", for: indexPath)
-        var content = cell.defaultContentConfiguration()
-        
-        if let thumbnail = SpaceStories.shared.thumbnails[row],
-           let image = UIImage(data: thumbnail),
-           let cropped = cropImageToSquare(image: image) {
-            content.image  = cropped
-            content.imageProperties.maximumSize = .init(
-                width: cell.bounds.height - 2,
-                height: cell.bounds.height - 2
-            )
+        if let storyCell = cell as? SpaceStoryViewCell {
+            let row = indexPath.row
+            var content = storyCell.defaultContentConfiguration()
+            if row >= SpaceStories.shared.thumbnails.count {
+                // Почему-то это не работает, индикатор все равно не отображается
+                // storyCell.activityIndicator.startAnimating()
+                // Заменил статичной картинкой
+                content.image = UIImage(named: "loadingSign")
+            } else if let thumbnail = SpaceStories.shared.thumbnails[row],
+                      let image = UIImage(data: thumbnail),
+                      let cropped = cropImageToSquare(image: image) {
+                // Image loaded successfully
+                // storyCell.activityIndicator.stopAnimating()
+                content.image  = cropped
+                content.imageProperties.maximumSize = .init(
+                    width: storyCell.bounds.height - 2,
+                    height: storyCell.bounds.height - 2
+                )
+            } else {
+                // Image can not be loaded.
+                content.image = UIImage(named: "questionMark")
+            }
+            content.text = SpaceStories.shared.stories[row].title
+            storyCell.contentConfiguration = content
+            return storyCell
         } else {
-            content.image = UIImage.init(named: "questionMark")
+            return cell
         }
-        
-        content.text = SpaceStories.shared.stories[row].title
-        cell.contentConfiguration = content
-        
-        return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
