@@ -23,7 +23,7 @@ class NetworkManager {
     func fetchStories(count: Int) {
         let url = dataSource + "?api_key=\(apiKey)&count=\(count)"
         guard let request = URL(string: url) else {
-            self.onError("Failed to parse URL")
+            self.onError("Failed parsing URL")
             return
         }
     
