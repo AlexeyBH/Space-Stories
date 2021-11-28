@@ -17,8 +17,8 @@ class SpaceStoryViewCell: UITableViewCell {
         var content = self.defaultContentConfiguration()
         self.selectionStyle = .none
         content.imageProperties.maximumSize = .init(
-            width: self.bounds.height - 2,
-            height: self.bounds.height - 2
+            width: self.bounds.height - 10,
+            height: self.bounds.height - 10
         )
         if row >= SpaceStories.shared.thumbnails.count {
             // Почему-то это не работает, индикатор все равно не отображается
