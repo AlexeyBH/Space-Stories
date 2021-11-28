@@ -23,7 +23,7 @@ class StoryViewController: UIViewController {
     private var imageData: Data!
     
     // MARK: - Public methods
-    func fetchImage(forIndex: Int) {
+    func configView(forIndex: Int) {
         print("Detailed image for row: \(forIndex)")
         //var data: Data?
         DispatchQueue.global().async {
@@ -42,8 +42,21 @@ class StoryViewController: UIViewController {
                             width: image.size.width,
                             height: image.size.height
                         )
-                        self.storyText.text = SpaceStories.shared.stories[self.index].explanation
-                        self.storyText.textColor = .white
+                        
+                        let strokeTextAttributes = [
+                            NSAttributedString.Key.strokeColor: UIColor.black,
+                            NSAttributedString.Key.foregroundColor: UIColor.white,
+                            NSAttributedString.Key.strokeWidth: -2.0,
+                            NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 25)
+                        ] as [NSAttributedString.Key : Any]
+                        
+                        let myAttrString = NSAttributedString(
+                            string: SpaceStories.shared.stories[self.index].explanation ?? "",
+                            attributes: strokeTextAttributes
+                        )
+                                                
+                        self.storyText.attributedText = myAttrString
+
                     }
                 }
             }

@@ -43,35 +43,24 @@ class SpaceStoryViewCell: UITableViewCell {
   
     
 // MARK: - Private methods
-private func cropImageToSquare(image: UIImage) -> UIImage? {
-    if let cgImage = image.cgImage {
-        let size = min(cgImage.width, cgImage.height)
-        let rect = CGRect(
-            x: (cgImage.width  - size) / 2,
-            y: (cgImage.height - size) / 2,
-            width: size,
-            height: size
-        )
-        if let cropped = cgImage.cropping(to: rect) {
-            return UIImage(cgImage: cropped)
+    
+    private func cropImageToSquare(image: UIImage) -> UIImage? {
+        if let cgImage = image.cgImage {
+            let size = min(cgImage.width, cgImage.height)
+            let rect = CGRect(
+                x: (cgImage.width  - size) / 2,
+                y: (cgImage.height - size) / 2,
+                width: size,
+                height: size
+            )
+            if let cropped = cgImage.cropping(to: rect) {
+                return UIImage(cgImage: cropped)
+            } else {
+                return nil
+            }
         } else {
             return nil
         }
-    } else {
-        return nil
-    }
-}
-    
-    private func showSpinner(in view: UIView) -> UIActivityIndicatorView {
-        let activityIndicator = UIActivityIndicatorView(style: .large)
-        activityIndicator.color = .white
-        activityIndicator.startAnimating()
-        activityIndicator.center = view.center
-        activityIndicator.hidesWhenStopped = true
-        
-        view.addSubview(activityIndicator)
-        
-        return activityIndicator
     }
     
 }

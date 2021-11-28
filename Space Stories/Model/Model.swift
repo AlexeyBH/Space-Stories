@@ -31,7 +31,7 @@ class SpaceStories {
     }
     
     // MARK: - Private properties
-    private let storyCount = 20
+    private let storyCount = 30
     private let manager: NetworkManager = .init()
     
 

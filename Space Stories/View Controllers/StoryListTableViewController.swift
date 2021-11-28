@@ -52,7 +52,7 @@ class StoryListTableViewController: UITableViewController {
         if let data = SpaceStories.shared.thumbnails[self.rowId],
            let _ = UIImage(data: data) {
             dest.index = self.rowId
-            dest.fetchImage(forIndex: self.rowId)
+            dest.configView(forIndex: self.rowId)
         } else {
             showAlert("Sorry, this story can't be opened. Please try another one..")
         }
