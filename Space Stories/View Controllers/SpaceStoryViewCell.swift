@@ -36,6 +36,7 @@ class SpaceStoryViewCell: UITableViewCell {
             content.image = UIImage(named: "questionMark")
         }
         content.text = SpaceStories.shared.stories[row].title
+        content.textProperties.color = .lightGray
         self.contentConfiguration = content
         return self
     }
@@ -60,5 +61,17 @@ private func cropImageToSquare(image: UIImage) -> UIImage? {
         return nil
     }
 }
+    
+    private func showSpinner(in view: UIView) -> UIActivityIndicatorView {
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.color = .white
+        activityIndicator.startAnimating()
+        activityIndicator.center = view.center
+        activityIndicator.hidesWhenStopped = true
+        
+        view.addSubview(activityIndicator)
+        
+        return activityIndicator
+    }
     
 }

@@ -14,6 +14,7 @@ class StoryViewController: UIViewController {
     
     @IBOutlet var imageView: SpringImageView!
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet var storyText: SpringLabel!
     
     // MARK: - Public properties
     var index: Int = 0
@@ -41,7 +42,8 @@ class StoryViewController: UIViewController {
                             width: image.size.width,
                             height: image.size.height
                         )
-                        self.imageView.animate()
+                        self.storyText.text = SpaceStories.shared.stories[self.index].explanation
+                        self.storyText.textColor = .white
                     }
                 }
             }

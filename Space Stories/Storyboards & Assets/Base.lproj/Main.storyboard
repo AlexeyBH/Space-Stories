@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -15,7 +14,11 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="6Eo-Lw-iFN">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="separatorColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="sectionIndexColor" red="0.49545705783655014" green="0.88813726695279405" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="sectionIndexBackgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="spaceStoryCell" id="1kW-WP-W0H" customClass="SpaceStoryViewCell" customModule="Space_Stories" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="44.5" width="414" height="59.5"/>
@@ -31,12 +34,14 @@
                                             </constraints>
                                         </activityIndicatorView>
                                     </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="bottomMargin" secondItem="5gk-lZ-TpL" secondAttribute="bottom" id="5jW-fm-fhZ"/>
                                         <constraint firstItem="5gk-lZ-TpL" firstAttribute="leading" secondItem="7yh-JA-gw4" secondAttribute="leadingMargin" id="Cho-X2-wdM"/>
                                         <constraint firstItem="5gk-lZ-TpL" firstAttribute="top" secondItem="7yh-JA-gw4" secondAttribute="topMargin" id="rIj-fz-LND"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="activityIndicator" destination="5gk-lZ-TpL" id="sMt-6c-bdi"/>
                                     <segue destination="pNF-aa-1Ht" kind="push" id="A2D-gW-xDx"/>
@@ -65,9 +70,9 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SpringImageView" translatesAutoresizingMaskIntoConstraints="NO" id="piT-EA-VK3" customClass="SpringImageView" customModule="Spring">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="animation" value="zoomOut"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="animation" value="fadeIn"/>
                                     <userDefinedRuntimeAttribute type="number" keyPath="duration">
-                                        <real key="value" value="15"/>
+                                        <real key="value" value="30"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="scaleX">
                                         <real key="value" value="3"/>
@@ -75,21 +80,65 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="scaleY">
                                         <real key="value" value="3"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="velocity">
+                                        <real key="value" value="-2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="repeatCount">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="force">
+                                        <real key="value" value="-1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="autostart" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="autohide" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="curve" value="linear"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="y">
+                                        <real key="value" value="500"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="ImU-4h-WKO">
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="ImU-4h-WKO">
                                 <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
                             </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZLK-48-FWN" customClass="SpringLabel" customModule="Spring">
+                                <rect key="frame" x="20" y="88" width="374" height="774"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <color key="highlightedColor" red="0.49545705779999999" green="0.88813726699999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="curve" value="linear"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="autostart" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="autohide" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="animation" value="fadeIn"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="force">
+                                        <real key="value" value="-1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="duration">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="velocity">
+                                        <real key="value" value="-1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="y">
+                                        <real key="value" value="700"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Vf7-bv-gZx"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" red="0.51173758840064643" green="0.95196128825525328" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="piT-EA-VK3" firstAttribute="trailing" secondItem="gbS-mK-21i" secondAttribute="trailing" id="55x-nB-sGa"/>
                             <constraint firstItem="ImU-4h-WKO" firstAttribute="centerX" secondItem="gbS-mK-21i" secondAttribute="centerX" id="6Du-CN-060"/>
+                            <constraint firstItem="ZLK-48-FWN" firstAttribute="bottom" secondItem="Vf7-bv-gZx" secondAttribute="bottom" id="Fn4-Mf-05K"/>
                             <constraint firstItem="piT-EA-VK3" firstAttribute="top" secondItem="gbS-mK-21i" secondAttribute="top" id="PcJ-cy-t3J"/>
+                            <constraint firstItem="ZLK-48-FWN" firstAttribute="top" secondItem="Vf7-bv-gZx" secondAttribute="top" id="SdO-rz-jxx"/>
+                            <constraint firstItem="ZLK-48-FWN" firstAttribute="leading" secondItem="Vf7-bv-gZx" secondAttribute="leading" constant="20" id="X51-oW-O9r"/>
                             <constraint firstItem="piT-EA-VK3" firstAttribute="leading" secondItem="gbS-mK-21i" secondAttribute="leading" id="b2A-Me-2ym"/>
                             <constraint firstItem="ImU-4h-WKO" firstAttribute="centerY" secondItem="gbS-mK-21i" secondAttribute="centerY" id="lOU-To-uvg"/>
                             <constraint firstItem="piT-EA-VK3" firstAttribute="bottom" secondItem="gbS-mK-21i" secondAttribute="bottom" id="pwO-yO-2kU"/>
+                            <constraint firstItem="ZLK-48-FWN" firstAttribute="trailing" secondItem="Vf7-bv-gZx" secondAttribute="trailing" constant="-20" id="rVT-gA-ZT8"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="neo-8D-cvS">
@@ -98,6 +147,7 @@
                     <connections>
                         <outlet property="activityIndicator" destination="ImU-4h-WKO" id="PxV-th-mdn"/>
                         <outlet property="imageView" destination="piT-EA-VK3" id="eWf-NQ-nfg"/>
+                        <outlet property="storyText" destination="ZLK-48-FWN" id="Iki-xR-mfi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Ni-6l-jzl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -107,8 +157,9 @@
         <!--Navigation Controller-->
         <scene sceneID="Hqh-O3-8AC">
             <objects>
-                <navigationController id="oX1-yT-9OJ" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2Kd-SV-pc4">
+                <navigationController interfaceStyle="dark" id="oX1-yT-9OJ" sceneMemberID="viewController">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="2Kd-SV-pc4">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -123,8 +174,5 @@
     </scenes>
     <resources>
         <image name="SpringImageView" width="128" height="128"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>
