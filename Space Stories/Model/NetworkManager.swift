@@ -9,14 +9,17 @@ import Foundation
 
 class NetworkManager {
         
+    // MARK: - Public properties
     var stories: [SpaceStory] = []
     
     var onFinished: () -> Void = {}
     var onError: (String) -> Void = {_ in }
     
+    // MARK: - Private properties
     private let dataSource = "https://api.nasa.gov/planetary/apod"
     private let apiKey = "ziooiNKqgKArOsZewgeUmwyWYBKIRSZcb2VEPwbv"
 
+    // MARK: - Public methods
     func fetchStories(count: Int) {
         let url = dataSource + "?api_key=\(apiKey)&count=\(count)"
         guard let request = URL(string: url) else {

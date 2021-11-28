@@ -9,25 +9,31 @@ import UIKit
 
 class StoryViewController: UIViewController {
     
-  //  @IBOutlet var imageView: UIImageView!
+    // MARK: - IB Outlets
     
     @IBOutlet var imageView: UIImageView!
-    private var imageData: Data!
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
-    
-    private func updateImage() {
-        if let data = imageData {
-            imageView.image = UIImage(data: data)
-            imageView.reloadInputViews()
-        }
-    }
-    
+    // MARK: - Public properties
     var index: Int = 0
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        SpaceStories.shared.onFinished = updateImage
-        imageData = SpaceStories.shared.getStoryImage(forIndex: index)
+    // MARK: - Private properties
+    private var imageData: Data!
+    
+    // MARK: - Public methods
+    func fetchImage(forIndex: Int) {
+        print("Detailed image for row: \(forIndex)")
+        if let safeData = SpaceStories.shared.getStoryImage(forIndex: index) {
+            print("Got safe data..")
+            if let image = UIImage(data: safeData) {
+                print("Got image finished!")
+                DispatchQueue.main.async {
+                    self.imageView.image = image
+                    self.activityIndicator.stopAnimating()
+                }
+            }
+        }
     }
+
 
 }

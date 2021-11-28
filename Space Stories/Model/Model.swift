@@ -17,6 +17,8 @@ struct SpaceStory: Codable {
 
 class SpaceStories {
     
+    // MARK: - Public properties
+    
     static let shared = SpaceStories()
 
     var onFinished: () -> Void = { }
@@ -28,25 +30,19 @@ class SpaceStories {
         manager.stories
     }
     
+    // MARK: - Private properties
     private let storyCount = 20
     private let manager: NetworkManager = .init()
     
-    private func updateThumbnails() {
-        manager.onFinished = self.onFinished
-        self.onFinished()
-        for story in stories {
-            if let url = story.url {
-                thumbnails.append(manager.fetchImage(imageURL: url))
-            }
-        }
-    }
-    
+
+    // MARK: - Initializer
     private init() {
         manager.onFinished = updateThumbnails
         manager.onError = self.onError
         manager.fetchStories(count: storyCount)
     }
     
+    // MARK: - Public methods
     func getStoryImage(forIndex: Int) -> Data? {
         if forIndex < 0 || forIndex >= stories.count {
             return nil
@@ -56,6 +52,17 @@ class SpaceStories {
             return manager.fetchImage(imageURL: hdurl)
         } else {
             return nil
+        }
+    }
+    
+    // MARK: - Private methods
+    private func updateThumbnails() {
+        manager.onFinished = self.onFinished
+        self.onFinished()
+        for story in stories {
+            if let url = story.url {
+                thumbnails.append(manager.fetchImage(imageURL: url))
+            }
         }
     }
 }
