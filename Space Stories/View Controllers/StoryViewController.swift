@@ -11,16 +11,12 @@ import Spring
 class StoryViewController: UIViewController {
     
     // MARK: - IB Outlets
-    
     @IBOutlet var imageView: SpringImageView!
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var storyText: SpringLabel!
     
     // MARK: - Public properties
     var index: Int = 0
-    
-    // MARK: - Private properties
-    private var imageData: Data!
     
     // MARK: - Public methods
     func configView(forIndex: Int) {
