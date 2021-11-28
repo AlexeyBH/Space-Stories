@@ -6,12 +6,13 @@
 //
 
 import UIKit
+import Spring
 
 class StoryViewController: UIViewController {
     
     // MARK: - IB Outlets
     
-    @IBOutlet var imageView: UIImageView!
+    @IBOutlet var imageView: SpringImageView!
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
     // MARK: - Public properties
@@ -23,16 +24,29 @@ class StoryViewController: UIViewController {
     // MARK: - Public methods
     func fetchImage(forIndex: Int) {
         print("Detailed image for row: \(forIndex)")
-        if let safeData = SpaceStories.shared.getStoryImage(forIndex: index) {
-            print("Got safe data..")
-            if let image = UIImage(data: safeData) {
-                print("Got image finished!")
-                DispatchQueue.main.async {
-                    self.imageView.image = image
-                    self.activityIndicator.stopAnimating()
+        //var data: Data?
+        DispatchQueue.global().async {
+            print("async")
+            //data =
+            if let safeData = SpaceStories.shared.getStoryImage(forIndex: self.index) {
+                print("Got safe data..")
+                if let image = UIImage(data: safeData) {
+                    print("Got image finished!")
+                    DispatchQueue.main.async {
+                        self.activityIndicator.stopAnimating()
+                        self.imageView.image = image
+                        self.imageView.bounds = .init(
+                            x: self.imageView.bounds.minX,
+                            y: self.imageView.bounds.minY,
+                            width: image.size.width,
+                            height: image.size.height
+                        )
+                        self.imageView.animate()
+                    }
                 }
             }
         }
+
     }
 
 

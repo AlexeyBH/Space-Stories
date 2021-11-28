@@ -49,9 +49,13 @@ class StoryListTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let dest = segue.destination as? StoryViewController else { return }
-        print("Calling child...")
-        dest.index = self.rowId
-        dest.fetchImage(forIndex: self.rowId)
+        if let data = SpaceStories.shared.thumbnails[self.rowId],
+           let _ = UIImage(data: data) {
+            dest.index = self.rowId
+            dest.fetchImage(forIndex: self.rowId)
+        } else {
+            showAlert("Sorry, this story can't be opened. Please try another one..")
+        }
     }
 
 // MARK: - Private methods
