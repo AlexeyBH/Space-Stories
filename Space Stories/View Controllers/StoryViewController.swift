@@ -24,15 +24,9 @@ class StoryViewController: UIViewController {
     
     // MARK: - Public methods
     func configView(forIndex: Int) {
-        print("Detailed image for row: \(forIndex)")
-        //var data: Data?
         DispatchQueue.global().async {
-            print("async")
-            //data =
             if let safeData = SpaceStories.shared.getStoryImage(forIndex: self.index) {
-                print("Got safe data..")
                 if let image = UIImage(data: safeData) {
-                    print("Got image finished!")
                     DispatchQueue.main.async {
                         self.activityIndicator.stopAnimating()
                         self.imageView.image = image
@@ -54,15 +48,11 @@ class StoryViewController: UIViewController {
                             string: SpaceStories.shared.stories[self.index].explanation ?? "",
                             attributes: strokeTextAttributes
                         )
-                                                
                         self.storyText.attributedText = myAttrString
-
                     }
                 }
             }
         }
-
     }
-
 
 }
