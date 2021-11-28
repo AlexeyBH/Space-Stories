@@ -12,28 +12,30 @@ class NetworkManager {
     var stories: [SpaceStory] = []
     
     var onFinished: () -> Void = {}
+    var onError: (String) -> Void = {_ in }
     
     private let dataSource = "https://api.nasa.gov/planetary/apod"
     private let apiKey = "ziooiNKqgKArOsZewgeUmwyWYBKIRSZcb2VEPwbv"
 
     func fetchStories(count: Int) {
         let url = dataSource + "?api_key=\(apiKey)&count=\(count)"
-        guard let request = URL(string: url) else { return }
+        guard let request = URL(string: url) else {
+            self.onError("Failed to parse URL")
+            return
+        }
     
         URLSession.shared.dataTask(with: request) { data, _ , error in
             guard let safeData = data else {
-                print(error?.localizedDescription ?? "No description")
+                self.onError(error?.localizedDescription ?? "No description")
                 return
             }
             do {
                 let allStories = try
                     JSONDecoder().decode([SpaceStory].self, from: safeData)
                 self.stories = allStories
-                DispatchQueue.main.async {
-                    self.onFinished()
-                }
+                self.onFinished()
             } catch let error {
-                print(error)
+                self.onError(error.localizedDescription)
                 return
             }
         }.resume()
@@ -42,6 +44,7 @@ class NetworkManager {
     func fetchImage(imageURL: String) -> Data? {
         guard let url = URL(string: imageURL),
               let imageData = try? Data(contentsOf: url) else {
+                  self.onError("Failed fetching: \(imageURL)")
                   return nil
               }
         self.onFinished()

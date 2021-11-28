@@ -8,22 +8,26 @@
 import UIKit
 
 class StoryViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    
+  //  @IBOutlet var imageView: UIImageView!
+    
+    @IBOutlet var imageView: UIImageView!
+    private var imageData: Data!
+    
+    
+    private func updateImage() {
+        if let data = imageData {
+            imageView.image = UIImage(data: data)
+            imageView.reloadInputViews()
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    var index: Int = 0
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        SpaceStories.shared.onFinished = updateImage
+        imageData = SpaceStories.shared.getStoryImage(forIndex: index)
     }
-    */
 
 }

@@ -20,7 +20,8 @@ class SpaceStories {
     static let shared = SpaceStories()
 
     var onFinished: () -> Void = { }
-
+    var onError: (String) -> Void = {_ in }
+    
     var thumbnails: [Data?] = []
     
     var stories: [SpaceStory] {
@@ -42,6 +43,7 @@ class SpaceStories {
     
     private init() {
         manager.onFinished = updateThumbnails
+        manager.onError = self.onError
         manager.fetchStories(count: storyCount)
     }
     
