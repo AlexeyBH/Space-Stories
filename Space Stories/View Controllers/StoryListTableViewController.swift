@@ -111,7 +111,7 @@ class StoryListTableViewController: UITableViewController {
     }
     
     private func onError(message: String) {
-        showAlert("Failed to load data from remote site.")
+        showAlert("Failed loading data from the remote site.")
     }
     
     private func reloadTableViewController() {
