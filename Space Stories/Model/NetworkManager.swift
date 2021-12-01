@@ -39,56 +39,48 @@ class NetworkManager {
             switch data {
             case .success(let data):
                 do {
-                    print("success")
                     let stories = try JSONDecoder().decode(
                         [SpaceStory].self,
                         from: data
                     )
                     // Это нужно так как в ответе часто попадаются
                     // словари с отсутствующими ключевыми свойствами,
-                    // а они нам не нужны
+                    // а такие записи нам не нужны.
+                    // Или надо лучше было делать свойства не опциональными и декодить
                     let filtered = stories.filter {
                         $0.url != nil &&
                         $0.title != nil &&
                         $0.explanation != nil &&
                         $0.hdurl != nil
                     }
-                    print("init count: \(stories.count), filtered count: \(filtered.count)")
                     handler(.success(filtered))
                 } catch {
-                    print("Error 1000")
                     handler(.failure(.decodingError))
                 }
             case .failure(let error):
-                print("Error 1001")
                 handler(.failure(error))
             }
         }
         
-        print("Before fetching stories...")
         fetchData(url: url, handler: getStories)
         
     }
     
 
+    // Универсальная функция для получения любых данных - как записей, так и картинок.
     func fetchData(url: String, handler: @escaping (Result<Data, NetworkError>) -> Void) {
         AF.request(url)
             .validate()
             .response { dataResponse in
-                print("begin fetching data...")
                 DispatchQueue.main.async {
                     switch dataResponse.result {
                     case .success(let value):
-                        print("success!")
                         guard let data = value else {
-                            print("failure - no data")
                             handler(.failure(.noData))
                             return
                         }
-                        print("data OK")
                         handler(.success(data))
                     case .failure(let afError):
-                        print("Error")
                         handler(.failure(self.convertAFError(afError)))
                     }
                 }

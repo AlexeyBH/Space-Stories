@@ -13,8 +13,7 @@ class SpaceStoryViewCell: UITableViewCell {
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
     // MARK: - Public methods
-    func configCell(parent: StoryListTableViewController) -> UITableViewCell {
-        let row = parent.rowId
+    func configCell(parent: StoryListTableViewController, row: Int) -> UITableViewCell {
         var content = self.defaultContentConfiguration()
         self.selectionStyle = .none
         content.imageProperties.maximumSize = .init(

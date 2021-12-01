@@ -15,16 +15,16 @@ class StoryListTableViewController: UITableViewController {
     var rowId: Int = 0
     
     // MARK: - Private Properties
-    
-    // Я не понимаю почему без = nil компилятор выдает ошибку о том, что требуется инициализатор
-    private let loadingImage: UIImage! = nil
-    private let questionImage: UIImage! = nil
 
-     
+    private var loadingImage: UIImage!
+    private var questionImage: UIImage!
+
     // MARK: - Override funcs
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadingImage = UIImage(named: "loadingSign")
+        questionImage = UIImage(named: "questionMark")
         NetworkManager.shared.fetchStories(handler: handler)
     }
 
@@ -43,7 +43,7 @@ class StoryListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "spaceStoryCell", for: indexPath)
         if let storyCell = cell as? SpaceStoryViewCell {
-            return storyCell.configCell(parent: self)
+            return storyCell.configCell(parent: self, row: indexPath.row)
         } else {
             return cell
         }
@@ -72,6 +72,7 @@ class StoryListTableViewController: UITableViewController {
         switch result {
         case .success(let stories):
             self.spaceStories = stories
+            self.tableView.reloadData()
             thumbnails = (0..<stories.count).map { _ in loadingImage}
             storyAvailable = (0..<stories.count).map { _ in false }
             for (index, story) in stories.enumerated() {
@@ -89,7 +90,7 @@ class StoryListTableViewController: UITableViewController {
     
     // Так как сетевые запросы выполняются асинхронно, эта функция генерирует
     // требуемый обработчик в зависимости от индекса картинки в массиве.
-    // Обработчик знает к какому именно индексу обращаться при его выполнении.
+    // Созданный обработчик знает к какому именно индексу обращаться при его выполнении.
     private func makeThumbnailHandler(index: Int) -> (Result<Data, NetworkError>) -> Void {
         return { result in
             switch result {
@@ -105,6 +106,7 @@ class StoryListTableViewController: UITableViewController {
                 self.thumbnails[index] = UIImage(named: "questionMark")
                 self.storyAvailable[index] = false
             }
+            self.tableView.reloadData()
         }
     }
     
