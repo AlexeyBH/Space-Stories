@@ -9,19 +9,20 @@
 /* Begin PBXBuildFile section */
 		09BB4876DC639D40AD3B61A7 /* Pods_Space_Stories.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D02BC568F0CE1723AA2CDA3 /* Pods_Space_Stories.framework */; };
 		4279D8942753A51700CFE01B /* SpaceStoryViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4279D8932753A51700CFE01B /* SpaceStoryViewCell.swift */; };
+		42E937AC27580E5500A30A5A /* SpaceStory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E937AB27580E5500A30A5A /* SpaceStory.swift */; };
 		42F515EE275251C100063DBB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F515ED275251C100063DBB /* AppDelegate.swift */; };
 		42F515F0275251C100063DBB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F515EF275251C100063DBB /* SceneDelegate.swift */; };
 		42F515F5275251C100063DBB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42F515F3275251C100063DBB /* Main.storyboard */; };
 		42F515F7275251C200063DBB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42F515F6275251C200063DBB /* Assets.xcassets */; };
 		42F515FA275251C200063DBB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42F515F8275251C200063DBB /* LaunchScreen.storyboard */; };
 		42F5160A275255B100063DBB /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F51609275255B100063DBB /* NetworkManager.swift */; };
-		42F516102752568E00063DBB /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F5160F2752568E00063DBB /* Model.swift */; };
 		42F51612275256B300063DBB /* StoryListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F51611275256B300063DBB /* StoryListTableViewController.swift */; };
 		42F51614275256EB00063DBB /* StoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F51613275256EB00063DBB /* StoryViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4279D8932753A51700CFE01B /* SpaceStoryViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceStoryViewCell.swift; sourceTree = "<group>"; };
+		42E937AB27580E5500A30A5A /* SpaceStory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceStory.swift; sourceTree = "<group>"; };
 		42F515EA275251C100063DBB /* Space Stories.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Space Stories.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		42F515ED275251C100063DBB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42F515EF275251C100063DBB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -30,7 +31,6 @@
 		42F515F9275251C200063DBB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		42F515FB275251C300063DBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		42F51609275255B100063DBB /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkManager.swift; path = "Space Stories/Model/NetworkManager.swift"; sourceTree = SOURCE_ROOT; };
-		42F5160F2752568E00063DBB /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		42F51611275256B300063DBB /* StoryListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryListTableViewController.swift; sourceTree = "<group>"; };
 		42F51613275256EB00063DBB /* StoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryViewController.swift; sourceTree = "<group>"; };
 		6D02BC568F0CE1723AA2CDA3 /* Pods_Space_Stories.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Space_Stories.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,7 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				42F51609275255B100063DBB /* NetworkManager.swift */,
-				42F5160F2752568E00063DBB /* Model.swift */,
+				42E937AB27580E5500A30A5A /* SpaceStory.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -140,7 +140,6 @@
 				E8AB2E71E49222FF2E223B1C /* Pods-Space Stories.debug.xcconfig */,
 				EFD2051088126DCC4469A8FE /* Pods-Space Stories.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -260,9 +259,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				42F51614275256EB00063DBB /* StoryViewController.swift in Sources */,
-				42F516102752568E00063DBB /* Model.swift in Sources */,
 				42F5160A275255B100063DBB /* NetworkManager.swift in Sources */,
 				42F51612275256B300063DBB /* StoryListTableViewController.swift in Sources */,
+				42E937AC27580E5500A30A5A /* SpaceStory.swift in Sources */,
 				4279D8942753A51700CFE01B /* SpaceStoryViewCell.swift in Sources */,
 				42F515EE275251C100063DBB /* AppDelegate.swift in Sources */,
 				42F515F0275251C100063DBB /* SceneDelegate.swift in Sources */,
