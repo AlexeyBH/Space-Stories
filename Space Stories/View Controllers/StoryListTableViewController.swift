@@ -109,16 +109,7 @@ class StoryListTableViewController: UITableViewController {
             self.tableView.reloadData()
         }
     }
-    
-    private func onError(message: String) {
-        showAlert("Failed loading data from the remote site.")
-    }
-    
-    private func reloadTableViewController() {
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
-    }
+
     
     private func showAlert(_ text: String) {
         DispatchQueue.main.async {
