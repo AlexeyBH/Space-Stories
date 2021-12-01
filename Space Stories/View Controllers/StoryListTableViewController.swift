@@ -61,7 +61,6 @@ class StoryListTableViewController: UITableViewController {
         } else if !storyAvailable[self.rowId] {
             showAlert("Sorry, this story can't be opened. Please try another one..")
         } else {
-            dest.index = self.rowId
             dest.configView(parent: self)
         }
     }
