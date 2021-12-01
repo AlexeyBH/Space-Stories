@@ -7,5 +7,6 @@ target 'Space Stories' do
 
   # Pods for Space Stories
   pod 'Spring', :git => 'https://github.com/LexDeBash/Spring.git'
+  pod 'Alamofire', '~> 5.4'
 
 end

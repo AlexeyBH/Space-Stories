@@ -8,16 +8,24 @@
 import UIKit
 
 class StoryListTableViewController: UITableViewController {
+    // MARK: - Public properties
+    var thumbnails: [UIImage?] = []
+    var storyAvailable: [Bool] = []
+    var spaceStories: [SpaceStory] = []
+    var rowId: Int = 0
     
     // MARK: - Private Properties
+    
+    // Я не понимаю почему без = nil компилятор выдает ошибку о том, что требуется инициализатор
+    private let loadingImage: UIImage! = nil
+    private let questionImage: UIImage! = nil
 
-    private var rowId: Int = 0
      
     // MARK: - Override funcs
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        SpaceStories.shared.onFinished = reloadTableViewController
+        NetworkManager.shared.fetchStories(handler: handler)
     }
 
    override func numberOfSections(in tableView: UITableView) -> Int {
@@ -25,7 +33,7 @@ class StoryListTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return SpaceStories.shared.stories.count
+        return spaceStories.count
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -35,7 +43,7 @@ class StoryListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "spaceStoryCell", for: indexPath)
         if let storyCell = cell as? SpaceStoryViewCell {
-            return storyCell.configCell(forIndex: indexPath.row)
+            return storyCell.configCell(parent: self)
         } else {
             return cell
         }
@@ -46,19 +54,59 @@ class StoryListTableViewController: UITableViewController {
         return indexPath
     }
     
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let dest = segue.destination as? StoryViewController else { return }
-        if let data = SpaceStories.shared.thumbnails[self.rowId],
-           let _ = UIImage(data: data) {
-            dest.index = self.rowId
-            dest.configView(forIndex: self.rowId)
-        } else {
+        if self.rowId >= storyAvailable.count {
+            showAlert("Please wait, stories are being downloaded")
+        } else if !storyAvailable[self.rowId] {
             showAlert("Sorry, this story can't be opened. Please try another one..")
+        } else {
+            dest.index = self.rowId
+            dest.configView(parent: self)
         }
     }
 
 // MARK: - Private methods
+    
+    private func handler(result: Result<[SpaceStory], NetworkError>) {
+        switch result {
+        case .success(let stories):
+            self.spaceStories = stories
+            thumbnails = (0..<stories.count).map { _ in loadingImage}
+            storyAvailable = (0..<stories.count).map { _ in false }
+            for (index, story) in stories.enumerated() {
+                if let url = story.url {
+                    NetworkManager.shared.fetchData(
+                        url: url,
+                        handler: makeThumbnailHandler(index: index)
+                    )
+                }
+            }
+        case .failure(let error):
+            showAlert(error.rawValue)
+        }
+    }
+    
+    // Так как сетевые запросы выполняются асинхронно, эта функция генерирует
+    // требуемый обработчик в зависимости от индекса картинки в массиве.
+    // Обработчик знает к какому именно индексу обращаться при его выполнении.
+    private func makeThumbnailHandler(index: Int) -> (Result<Data, NetworkError>) -> Void {
+        return { result in
+            switch result {
+            case .success(let data):
+                if let image = UIImage(data: data) {
+                    self.thumbnails[index] = self.cropImageToSquare(image: image)
+                    self.storyAvailable[index] = true
+                } else {
+                    self.thumbnails[index] = UIImage(named: "questionMark")
+                    self.storyAvailable[index] = false
+                }
+            case .failure(_):
+                self.thumbnails[index] = UIImage(named: "questionMark")
+                self.storyAvailable[index] = false
+            }
+        }
+    }
     
     private func onError(message: String) {
         showAlert("Failed to load data from remote site.")
@@ -84,5 +132,23 @@ class StoryListTableViewController: UITableViewController {
         }
     }
     
+    private func cropImageToSquare(image: UIImage) -> UIImage? {
+        if let cgImage = image.cgImage {
+            let size = min(cgImage.width, cgImage.height)
+            let rect = CGRect(
+                x: (cgImage.width  - size) / 2,
+                y: (cgImage.height - size) / 2,
+                width: size,
+                height: size
+            )
+            if let cropped = cgImage.cropping(to: rect) {
+                return UIImage(cgImage: cropped)
+            } else {
+                return nil
+            }
+        } else {
+            return nil
+        }
+    }
   
 }

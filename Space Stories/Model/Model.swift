@@ -13,56 +13,13 @@ struct SpaceStory: Codable {
     let url: String?
     let hdurl: String?
     let title: String?
-}
-
-class SpaceStories {
     
-    // MARK: - Public properties
-    
-    static let shared = SpaceStories()
-
-    var onFinished: () -> Void = { }
-    var onError: (String) -> Void = {_ in }
-    
-    var thumbnails: [Data?] = []
-    
-    var stories: [SpaceStory] {
-        manager.stories
-    }
-    
-    // MARK: - Private properties
-    private let storyCount = 30
-    private let manager: NetworkManager = .init()
-    
-
-    // MARK: - Initializer
-    private init() {
-        manager.onFinished = updateThumbnails
-        manager.onError = self.onError
-        manager.fetchStories(count: storyCount)
-    }
-    
-    // MARK: - Public methods
-    func getStoryImage(forIndex: Int) -> Data? {
-        if forIndex < 0 || forIndex >= stories.count {
-            return nil
-        }
-        
-        if let hdurl = stories[forIndex].hdurl {
-            return manager.fetchImage(imageURL: hdurl)
-        } else {
-            return nil
-        }
-    }
-    
-    // MARK: - Private methods
-    private func updateThumbnails() {
-        manager.onFinished = self.onFinished
-        self.onFinished()
-        for story in stories {
-            if let url = story.url {
-                thumbnails.append(manager.fetchImage(imageURL: url))
-            }
-        }
+    init(from dict: [String: Any]) {
+        explanation = dict["explanatiob"] as? String
+        url = dict["url"] as? String
+        hdurl = dict["hdurl"] as? String
+        title = dict["title"] as? String
     }
 }
+
+
